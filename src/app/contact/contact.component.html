@@ -1,0 +1,42 @@
+<h1>Contact Us</h1>
+
+<!-- take formGroup and bind it to messageForm which we defined in the component logic -->
+<!-- ngSubmit then through event binding we'll call the onSubmit method that we created -->
+<form [formGroup]="messageForm" (ngSubmit)="onSubmit()">
+
+  <h5 *ngIf="success">Your form is valid!</h5>
+
+  <label>
+    Name: 
+    <!-- formControlName connects name input value to component logic defined on lin 21 -->
+    <input type="text" formControlName="name">
+    <div *ngIf="submitted && messageForm.controls.name.errors" class="error">
+      <div *ngIf="messageForm.controls.name.errors.required">
+        Please enter a name.
+      </div>
+    </div>
+  </label>
+
+
+  <label>
+      Message: 
+      <!-- formControlName connects name input value to component logic defined on lin 21 -->
+      <textarea formControlName="message"></textarea>
+      <div *ngIf="submitted && messageForm.controls.name.errors" class="error">
+        <div *ngIf="messageForm.controls.message.errors.required">
+          Please enter a message.
+        </div>
+      </div>
+  </label>
+
+  <input type="submit" value="Send Message" class="cta">
+
+</form>
+
+<div *ngIf="submitted" class="results">
+  <strong>Name:</strong>
+  <span>{{ messageForm.controls.name.value }} </span>
+  <br>
+  <strong>Message:</strong>
+  <span>{{ messageForm.controls.message.value }} </span>
+</div>
